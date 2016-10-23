@@ -56,9 +56,9 @@ public class NearestNeighbor
         int distance = 0;
         int currentNode = 0;
         
-        for (int i = 0; i < data.length; i++)
+        for (int i = 1; i < data.length; i++)
         {    
-            if (i == 0)
+            if (i == 1)
             {
                 solution[0] = start;
                 currentNode = start;
@@ -66,7 +66,6 @@ public class NearestNeighbor
                 HashMap results = findNearestNeighbor(data, currentNode, solution);
                 distance += (Integer)results.get("distance");
                 currentNode = (Integer)results.get("index");
-                i +=1;
                 solution[i] = currentNode;
             }
             else
