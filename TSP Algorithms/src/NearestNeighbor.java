@@ -63,6 +63,7 @@ public class NearestNeighbor
             currentNode = (Integer)results.get("index");
             solution[i] = currentNode;        
         }
+        System.out.println("*****Neareast Neighbor Algorithm******");
         System.out.println("Total distance: " + distance);
         return solution;
     }
@@ -117,10 +118,10 @@ public class NearestNeighbor
     public static void main(String[] args)
     {
         Integer[] solution = findSolution(createSampleData(), 0);
-        System.out.print("Path: ");
+        System.out.println("Path: ");
         for(int i : solution)
         {
-            System.out.print(i + " - ");
+            System.out.println(i);
         }
     }
 }
