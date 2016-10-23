@@ -62,19 +62,12 @@ public class NearestNeighbor
             {
                 solution[0] = start;
                 currentNode = start;
-                
-                HashMap results = findNearestNeighbor(data, currentNode, solution);
-                distance += (Integer)results.get("distance");
-                currentNode = (Integer)results.get("index");
-                solution[i] = currentNode;
             }
-            else
-            {
-                HashMap results = findNearestNeighbor(data, currentNode, solution);
-                distance += (Integer)results.get("distance");
-                currentNode = (Integer)results.get("index");
-                solution[i] = currentNode;
-            }          
+            
+            HashMap results = findNearestNeighbor(data, currentNode, solution);
+            distance += (Integer)results.get("distance");
+            currentNode = (Integer)results.get("index");
+            solution[i] = currentNode;        
         }
         System.out.println("Total distance: " + distance);
         return solution;
