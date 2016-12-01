@@ -44,7 +44,7 @@ public class NearestNeighbor
         return data;
     }
     
-    private static Integer[] findSolution(int[][] data, int start)
+    public static Integer[] findSolution(int[][] data, int start)
     {
         Integer[] solution = new Integer[data.length];
         int distance = 0;
@@ -117,7 +117,7 @@ public class NearestNeighbor
     
     public static void main(String[] args)
     {
-        Integer[] solution = findSolution(createSampleData(), 0);
+        Integer[] solution = findSolution(FileHelper.getDataFromFile("4locations.txt", 4), 0);
         System.out.println("Path: ");
         for(int i : solution)
         {
