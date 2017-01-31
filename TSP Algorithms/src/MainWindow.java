@@ -50,7 +50,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         startingPointLabel.setText("Select starting point:");
 
-        nodesLabel.setText("Number of nodes:");
+        nodesLabel.setText("Number of vertices:");
 
         jMenu.setText("File");
 

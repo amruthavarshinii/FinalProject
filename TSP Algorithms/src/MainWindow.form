@@ -105,7 +105,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="nodesLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of nodes:"/>
+        <Property name="text" type="java.lang.String" value="Number of vertices:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nodesTextField">
