@@ -11,18 +11,18 @@
   <body>
     <div id="map"></div>
     <script type="text/javascript">
-// This is the minimum zoom level that we'll allow
-//Code for zoom and dragging http://stackoverflow.com/questions/3818016/google-maps-v3-limit-viewable-area-and-zoom-level
-var maxZoomLevel = 7;        
+    // This is the minimum zoom level that we'll allow
+    //Code for zoom and dragging http://stackoverflow.com/questions/3818016/google-maps-v3-limit-viewable-area-and-zoom-level
+    var maxZoomLevel = 7;        
 
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 53.416, lng: -8.492},
-    zoom: maxZoomLevel
-  });
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 53.416, lng: -8.492},
+        zoom: maxZoomLevel
+      });
   
-  var MapBounds = new google.maps.LatLngBounds(
+    var MapBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(52.416, -7.492),
     new google.maps.LatLng(54.416, -8.192));
 
@@ -38,29 +38,29 @@ function initMap() {
         }
     });
   
-  // Limit the zoom level
-   google.maps.event.addListener(map, 'zoom_changed', function() {
-     if (map.getZoom() < maxZoomLevel) map.setZoom(maxZoomLevel);
-   });
+    // Limit the zoom level
+    google.maps.event.addListener(map, 'zoom_changed', function() {
+       if (map.getZoom() < maxZoomLevel) map.setZoom(maxZoomLevel);
+    });
    
-   //Details
-   var infowindow = new google.maps.InfoWindow();
-  var service = new google.maps.places.PlacesService(map);
+    //Details
+    var infowindow = new google.maps.InfoWindow();
+    var service = new google.maps.places.PlacesService(map);
 
-  service.getDetails({
-    placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-  }, function(place, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      var marker = new google.maps.Marker({
-        map: map,
-        position: place.geometry.location
-      });
-      google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(place.name);
-        infowindow.open(map, this);
-      });
-    }
-  });
+    service.getDetails({
+      placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
+    }, function(place, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+    });
 }
 
     </script>
