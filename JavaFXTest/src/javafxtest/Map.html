@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+    <title>Google Maps JavaScript API Example</title> 
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 95%; }
+    </style>
+  </head>
+  <body>    
+    <div id="map"></div>
+    <script type="text/javascript">
+        // This is the minimum zoom level that we'll allow
+        //Code for zoom and dragging http://stackoverflow.com/questions/3818016/google-maps-v3-limit-viewable-area-and-zoom-level
+        var maxZoomLevel = 7;        
+        var latitude;
+        var longitude;
+        var map;
+        var infoWindow;
+        
+        function initMap() 
+        {
+            
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 53.416, lng: -8.492},
+                zoom: maxZoomLevel
+            });
+
+            var MapBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(52.416, -7.492),
+                new google.maps.LatLng(54.416, -8.192));
+
+            google.maps.event.addListener(map, 'dragend', function ()
+            {
+                if (MapBounds.contains(map.getCenter()))
+                {
+                    return;
+                }
+                else
+                {
+                    map.setCenter(new google.maps.LatLng(53.5, -8.623056));
+                }
+            });
+
+            // Limit the zoom level
+            google.maps.event.addListener(map, 'zoom_changed', function() {
+               if (map.getZoom() < maxZoomLevel) 
+               {
+                   map.setZoom(maxZoomLevel);
+               }
+            });
+            
+            //**********************
+            //Places Service Demo
+            //**********************
+            //Details
+            /*var tralee = {lat: 52.271485, lng: -9.701702};
+            infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+              location: tralee,
+              radius: 500,
+              type: ['store']
+            }, placeDetails);*/
+            
+            //Listener
+            map.addListener('click', function(e) 
+            {
+                latitude = e.latLng.lat(); 
+                longitude = e.latLng.lng();
+                placeMarkerAndPanTo(e.latLng, map);
+            });
+        }
+        
+        function placeMarkerAndPanTo(latLng, map) 
+        {
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: map
+            });
+            map.panTo(latLng);
+        }
+        
+        function createMarker(place) 
+        {
+            var placeLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+              map: map,
+              position: place.geometry.location
+            });
+            name = "here";
+            google.maps.event.addListener(marker, 'click', function() {
+              infowindow.setContent(place.name);
+              infowindow.open(map, this);
+            });
+        }
+        
+        function placeDetails(results, status) 
+        {
+            if (status === google.maps.places.PlacesServiceStatus.OK) 
+            {
+                for (var i = 0; i < results.length; i++) 
+                {
+                    createMarker(results[i]);
+                }
+            }
+        }
+        
+        function addLocation()
+        {
+            java.addLocation(longitude, latitude);
+        }
+        
+        function printLocations()
+        {
+            java.printLocations();
+        }
+    </script>
+    <input id="addLocation" type="button" value="Add Location" onclick="addLocation();" />
+    <input id="printLocations" type="button" value="Print Locations" onclick="printLocations();" />
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-ORl8X50QuLmTyhP4izLzCyWcza_eDGM&libraries=places&callback=initMap">
+    </script>
+  </body>
+</html>
