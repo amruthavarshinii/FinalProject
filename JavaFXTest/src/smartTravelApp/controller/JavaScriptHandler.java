@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javafxtest;
+package smartTravelApp.controller;
 
+import smartTravelApp.model.LocationsContainer;
+import smartTravelApp.model.Location;
 import java.util.Iterator;
 
 /**
