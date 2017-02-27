@@ -117,9 +117,16 @@
         {
             java.printLocations();
         }
+        
+        function clearSelection()
+        {
+            java.clearSelection();
+            initMap();
+        }
     </script>
     <input id="addLocation" type="button" value="Add Location" onclick="addLocation();" />
     <input id="printLocations" type="button" value="Print Locations" onclick="printLocations();" />
+    <input id="clearSelection" type="button" value="Clear Selection" onclick="clearSelection();" />
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-ORl8X50QuLmTyhP4izLzCyWcza_eDGM&libraries=places&callback=initMap">
     </script>

@@ -19,12 +19,12 @@ public class JavaScriptHandler
     
     public JavaScriptHandler()
     {
-        locations = new LocationsContainer();
+        clearSelection();
     }
     
     public void addLocation(String longitude, String latitude) 
     {
-        locations.add(new Location(longitude, latitude));
+        locations.addLocation(longitude, latitude);
         System.out.println("Location added");
     }
     
@@ -36,5 +36,11 @@ public class JavaScriptHandler
             Location location = (Location) e.next();
             System.out.println(location);
         }
+    }
+    
+    public void clearSelection()
+    {
+        locations = new LocationsContainer();
+        System.out.println("Selection cleared");
     }
 }
