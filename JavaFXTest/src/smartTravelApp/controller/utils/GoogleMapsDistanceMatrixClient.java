@@ -21,21 +21,25 @@ public class GoogleMapsDistanceMatrixClient
 
     OkHttpClient client = new OkHttpClient();
 
-    private String sendRequest(String url) throws IOException 
+    private long [] sendRequest(String url, int distanceArraySize) throws IOException 
     {
         Request request = new Request.Builder().url(url).build();
 
         Response response = client.newCall(request).execute();
-        JsonReader.processJSONResponse(response.body().string());
-        return response.body().string();
+        long [] distanceArray = JsonReader.processJSONResponse(response.body().string(), distanceArraySize);
+        System.out.println(response.body().string());
+        return distanceArray;
     }
 
     /**
      * Returns a symmetric matrix with all the distances between each place
      * @param places An array containing all places to be visited
+     * @return Returns a symmetric matrix containing the distances for each 
+     * pair of nodes
      */
-    public void getDistanceMatrix(String [] places) 
+    public long[][] getDistanceMatrix(String [] places) 
     {
+        long[][] distancesMatrix = new long[places.length][places.length];
         try
         {
             GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient();
@@ -47,14 +51,34 @@ public class GoogleMapsDistanceMatrixClient
             {
                 String urlRequest = buildRequestURL(places, originIndex, destinationsToBeProcessed); 
                 System.out.println(urlRequest);
-                String response = request.sendRequest(urlRequest);
-                System.out.println(response);
+                long [] distanceArray = request.sendRequest(urlRequest, places.length); 
+                distancesMatrix[originIndex] = buildRowForSymmetricMatrix(distanceArray, originIndex);
             }
         }
         catch(IOException ex)
         {
             ex.printStackTrace();
         }
+        return distancesMatrix;
+    }
+    
+    private long[] buildRowForSymmetricMatrix(long[] distanceArray, int originIndex)
+    {
+        long[] row = new long[distanceArray.length];
+        int distanceArrayIndex = 0;
+        for (int i = 0; i < row.length; i++)
+        {
+            if(i == originIndex)
+            {
+               row[i] = 0; 
+            }
+            else
+            {
+                row[i] = distanceArray[distanceArrayIndex];
+                distanceArrayIndex++;
+            }
+        }
+        return row;
     }
     
     private String buildRequestURL(String[] places, int originIndex, Integer destinationsToBeProcessed)

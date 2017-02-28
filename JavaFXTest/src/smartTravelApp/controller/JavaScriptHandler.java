@@ -73,11 +73,24 @@ public class JavaScriptHandler
             }
 
             GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient();  
-            request.getDistanceMatrix(places);
+            long[][] distances = request.getDistanceMatrix(places);
+            printSymmetricMatrix(distances);
         }
         else
         {
             System.out.println("No locations selected");
         }
+    }
+    
+    private void printSymmetricMatrix(long[][] distances)
+    {
+        for (int i = 0; i < distances.length; i++)
+            {
+                for (int j = 0; j < distances.length; j++)
+                {
+                    System.out.print(distances[i][j] + "  ");
+                }
+                System.out.println("");
+            }
     }
 }

@@ -20,10 +20,15 @@ public class JsonReader
      * Returns the distance between the origin and each destination sent in a 
      * Google Maps Distance Matrix API request
      * @param jsonResponse JSON response from the Google Maps Distance Matrix API service
+     * @param distanceArraySize The size for the array containing the distances
+     * @return An array containing the distances
      */
-    public static void processJSONResponse(String jsonResponse)
+    public static long [] processJSONResponse(String jsonResponse, int distanceArraySize)
     {
         JSONParser parser = new JSONParser();
+        
+        long[] distancesArray = new long[distanceArraySize];
+        int distanceArrayIndex = 0;
 
         try 
         {
@@ -43,11 +48,14 @@ public class JsonReader
                     JSONObject parameter = parameters.next();
                     JSONObject distanceObject = (JSONObject) parameter.get("distance");
                     long distance = (Long) distanceObject.get("value");
-                    System.out.println("Distance: " + distance/1000 + "km");
+                    //System.out.println("Distance: " + distance/1000 + "km");
+                    distancesArray[distanceArrayIndex] = distance;
+                    distanceArrayIndex++;
                 } 
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return distancesArray;
     }
 }
