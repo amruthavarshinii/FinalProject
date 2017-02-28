@@ -9,6 +9,7 @@ import smartTravelApp.controller.utils.GoogleMapsDistanceMatrixClient;
 import smartTravelApp.model.LocationsContainer;
 import smartTravelApp.model.Location;
 import java.util.Iterator;
+import smartTravelApp.controller.utils.algorithms.nearestNeighbor.NearestNeighbor;
 
 /**
  *
@@ -74,7 +75,8 @@ public class JavaScriptHandler
 
             GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient();  
             long[][] distances = request.getDistanceMatrix(places);
-            printSymmetricMatrix(distances);
+            //printSymmetricMatrix(distances);
+            processUsingNearestNeighbor(distances, 0);
         }
         else
         {
@@ -82,6 +84,17 @@ public class JavaScriptHandler
         }
     }
     
+    private void processUsingNearestNeighbor(long[][] distances, int startingNode)
+    {
+        NearestNeighbor test = new NearestNeighbor();           
+        Integer[] solution = test.processTour(distances, startingNode);
+        System.out.println("Path: ");
+        for(int i : solution)
+        {
+            System.out.println(i);
+        }
+    }
+   
     private void printSymmetricMatrix(long[][] distances)
     {
         for (int i = 0; i < distances.length; i++)
