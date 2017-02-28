@@ -9,7 +9,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import java.io.IOException;
-import smartTravelApp.controller.utils.JsonReader;
 
 /**
  *
