@@ -13,6 +13,18 @@ public class Location
 {
     private int locationId;
     private double longitude;
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
     private double latitude;
     
     public Location(String longitude, String latitude, int locationId)
