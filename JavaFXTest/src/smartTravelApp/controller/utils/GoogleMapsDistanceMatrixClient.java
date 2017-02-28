@@ -3,7 +3,7 @@
  * https://teamtreehouse.com/community/how-to-use-the-google-map-matrix-api-for-calculating-the-distance-between-two-points-in-java-a-big-treat-is-promise
  * Limits https://developers.google.com/maps/documentation/distance-matrix/usage-limits 
 */
-package smartTravelApp.controller;
+package smartTravelApp.controller.utils;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -15,7 +15,7 @@ import smartTravelApp.controller.utils.JsonReader;
  *
  * @author Rafael.Lopez
  */
-public class GoogleMatrixRequest 
+public class GoogleMapsDistanceMatrixClient 
 {
 
     private static final String API_KEY = "AIzaSyA-ORl8X50QuLmTyhP4izLzCyWcza_eDGM";
@@ -35,7 +35,7 @@ public class GoogleMatrixRequest
     {
         try
         {
-            GoogleMatrixRequest request = new GoogleMatrixRequest();
+            GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient();
 
             Integer destinationsToBeProcessed = places.length - 1;
 
