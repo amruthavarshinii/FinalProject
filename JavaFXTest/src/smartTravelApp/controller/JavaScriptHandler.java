@@ -43,4 +43,12 @@ public class JavaScriptHandler
         locations = new LocationsContainer();
         System.out.println("Selection cleared");
     }
+    
+    public void processSelection()
+    {
+        GoogleMatrixRequest request = new GoogleMatrixRequest();
+        String [] places = {"52.669720383688166,-8.63525390625", "52.274880130680536,-9.678955078125",
+                            "51.91039070988962,-8.4814453125", "53.363665164191865,-6.26220703125"};
+        request.getDistanceMatrix(places);
+    }
 }
