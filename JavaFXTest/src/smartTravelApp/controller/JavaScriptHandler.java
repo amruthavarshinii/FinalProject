@@ -23,12 +23,20 @@ public class JavaScriptHandler
         clearSelection();
     }
     
+    /**
+     * Adds a location to the current selection
+     * @param longitude The longitude of the location
+     * @param latitude The latitude of the location
+     */
     public void addLocation(String longitude, String latitude) 
     {
         locations.addLocation(longitude, latitude);
         System.out.println("Location added");
     }
     
+    /**
+     * Prints all location added to the selection
+     */
     public void printLocations()
     {
         Iterator e = locations.iterator();
@@ -39,12 +47,18 @@ public class JavaScriptHandler
         }
     }
     
+    /**
+     * Deletes the current selection
+     */
     public void clearSelection()
     {
         locations = new LocationsContainer();
         System.out.println("Selection cleared");
     }
     
+    /**
+     * Process the current selection of locations
+     */
     public void processSelection()
     {
         if (!locations.isEmpty())

@@ -31,6 +31,10 @@ public class GoogleMapsDistanceMatrixClient
         return response.body().string();
     }
 
+    /**
+     * Returns a symmetric matrix with all the distances between each place
+     * @param places An array containing all places to be visited
+     */
     public void getDistanceMatrix(String [] places) 
     {
         try

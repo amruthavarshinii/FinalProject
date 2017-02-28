@@ -20,9 +20,14 @@ public class LocationsContainer extends ArrayList
         index = 0;
     }
     
-    public void addLocation(String latitude, String longitud)
+    /**
+     * Adds a new location to the list
+     * @param longitude The longitude of the location
+     * @param latitude The latitude of the location
+     */
+    public void addLocation(String latitude, String longitude)
     {
-        Location location = new Location(latitude, longitud, index);
+        Location location = new Location(latitude, longitude, index);
         this.add(location);
         index++;
     }

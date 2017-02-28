@@ -11,22 +11,40 @@ package smartTravelApp.model;
  */
 public class Location 
 {
-    private int locationId;
-    private double longitude;
+    private final int locationId;
+    private final double longitude;
+    private final double latitude;
 
+    /**
+     * Returns the location ID
+     * @return
+     */
     public int getLocationId() {
         return locationId;
     }
 
+    /**
+     * Returns the longitude of this location
+     * @return
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * Returns the latitude of this location
+     * @return
+     */
     public double getLatitude() {
         return latitude;
     }
-    private double latitude;
     
+    /**
+     * Creates a Location object by taking in the longitude, latitude and locationID
+     * @param longitude Longitude of the location
+     * @param latitude Latitude of the location
+     * @param locationId Location ID
+     */
     public Location(String longitude, String latitude, int locationId)
     {
         this.longitude = Double.parseDouble(longitude.trim());

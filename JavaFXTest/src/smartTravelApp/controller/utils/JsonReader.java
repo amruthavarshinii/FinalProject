@@ -15,6 +15,12 @@ import java.util.Iterator;
  */
 public class JsonReader 
 {
+
+    /**
+     * Returns the distance between the origin and each destination sent in a 
+     * Google Maps Distance Matrix API request
+     * @param jsonResponse JSON response from the Google Maps Distance Matrix API service
+     */
     public static void processJSONResponse(String jsonResponse)
     {
         JSONParser parser = new JSONParser();
