@@ -9,6 +9,7 @@ import smartTravelApp.controller.utils.GoogleMapsDistanceMatrixClient;
 import smartTravelApp.model.LocationsContainer;
 import smartTravelApp.model.Location;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 import smartTravelApp.controller.utils.algorithms.nearestNeighbor.NearestNeighbor;
 
 /**
@@ -62,6 +63,7 @@ public class JavaScriptHandler
      */
     public void processSelection()
     {
+        String message;
         if (!locations.isEmpty())
         {
             String places[] = new String[locations.size()];
@@ -76,23 +78,25 @@ public class JavaScriptHandler
             GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient();  
             long[][] distances = request.getDistanceMatrix(places);
             //printSymmetricMatrix(distances);
-            processUsingNearestNeighbor(distances, 0);
+            message = processUsingNearestNeighbor(distances, 0);
+            JOptionPane.showMessageDialog(null, message, "Result", 1);
         }
         else
         {
-            System.out.println("No locations selected");
+            JOptionPane.showMessageDialog(null, "No locations selected!", "Error", 0);
         }
     }
     
-    private void processUsingNearestNeighbor(long[][] distances, int startingNode)
+    private String processUsingNearestNeighbor(long[][] distances, int startingNode)
     {
         NearestNeighbor test = new NearestNeighbor();           
         Integer[] solution = test.processTour(distances, startingNode);
-        System.out.println("Path: ");
+        String message = "Path:\n";
         for(int i : solution)
         {
-            System.out.println(i);
+            message = message.concat(i+"\n");
         }
+        return message;
     }
    
     private void printSymmetricMatrix(long[][] distances)
