@@ -6,8 +6,9 @@ import java.util.HashMap;
  * Written by Rafael Lopez <lopez.rafael08@gmail.com>, 2016
  */
 
-public class NearestNeighbor 
+public class NearestNeighbor extends TSPAlgorithm
 {    
+    @Override
     public Integer[] processTour(long[][] data, int start)
     {
         Integer[] solution = new Integer[data.length];

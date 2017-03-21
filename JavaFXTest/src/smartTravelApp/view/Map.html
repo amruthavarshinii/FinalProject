@@ -16,13 +16,13 @@
         var maxZoomLevel = 7;        
         var latitude;
         var longitude;
+        var place;
         var map;
         var infoWindow;
+        var geocoder;
         
         function initMap() 
-        {
-            
-            
+        {  
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 53.416, lng: -8.492},
                 zoom: maxZoomLevel
@@ -71,7 +71,35 @@
                 latitude = e.latLng.lat(); 
                 longitude = e.latLng.lng();
                 placeMarkerAndPanTo(e.latLng, map);
+                codeLatLng(latitude, longitude);
             });
+            
+            geocoder = new google.maps.Geocoder();
+        }
+        
+        function codeLatLng(lat, lng) 
+        {
+            var latlng = new google.maps.LatLng(lat, lng);
+            geocoder.geocode({
+                'latLng': latlng
+                }, function (results, status) 
+                {
+                    if (status === google.maps.GeocoderStatus.OK) 
+                    {
+                        if (results[1]) 
+                        {
+                            place = results[1].formatted_address;
+                        } 
+                        else 
+                        {
+                            java.printMessage('No results found');
+                        }
+                    } 
+                    else 
+                    {
+                        java.printMessage('Geocoder failed due to: ' + status);
+                    }
+                });
         }
         
         function placeMarkerAndPanTo(latLng, map) 
@@ -110,7 +138,7 @@
         
         function addLocation()
         {
-            java.addLocation(longitude, latitude);
+            java.addLocation(longitude, latitude, place);
         }
         
         function printLocations()

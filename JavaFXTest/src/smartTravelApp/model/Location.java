@@ -14,7 +14,16 @@ public class Location
     private final int locationId;
     private final double longitude;
     private final double latitude;
+    private final String placeDescription;
 
+    /**
+     * Returns the place description
+     * @return
+     */
+    public String getPlaceDescription() {
+        return placeDescription;
+    }
+    
     /**
      * Returns the location ID
      * @return
@@ -43,18 +52,20 @@ public class Location
      * Creates a Location object by taking in the longitude, latitude and locationID
      * @param longitude Longitude of the location
      * @param latitude Latitude of the location
+     * @param placeDescription Name of the place
      * @param locationId Location ID
      */
-    public Location(String longitude, String latitude, int locationId)
+    public Location(String longitude, String latitude, String placeDescription, int locationId)
     {
         this.longitude = Double.parseDouble(longitude.trim());
         this.latitude = Double.parseDouble(latitude.trim());
+        this.placeDescription = placeDescription;
         this.locationId = locationId;
     }
     
     @Override
     public String toString()
     {
-        return "ID: " + locationId + ", Long: " + longitude + ", Lat: " + latitude;
+        return "ID: " + locationId + ", Place: " + placeDescription + ", Long: " + longitude + ", Lat: " + latitude;
     }
 }

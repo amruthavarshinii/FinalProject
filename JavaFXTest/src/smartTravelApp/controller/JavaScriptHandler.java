@@ -5,12 +5,12 @@
  */
 package smartTravelApp.controller;
 
-import smartTravelApp.controller.utils.GoogleMapsDistanceMatrixClient;
 import smartTravelApp.model.LocationsContainer;
 import smartTravelApp.model.Location;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import smartTravelApp.controller.utils.algorithms.nearestNeighbor.NearestNeighbor;
+import smartTravelApp.controller.utils.algorithms.nearestNeighbor.TSPAlgorithm;
 
 /**
  *
@@ -30,9 +30,9 @@ public class JavaScriptHandler
      * @param longitude The longitude of the location
      * @param latitude The latitude of the location
      */
-    public void addLocation(String longitude, String latitude) 
+    public void addLocation(String longitude, String latitude, String placeDescription) 
     {
-        locations.addLocation(longitude, latitude);
+        locations.addLocation(longitude, latitude, placeDescription);
         System.out.println("Location added");
     }
     
@@ -66,19 +66,8 @@ public class JavaScriptHandler
         String message;
         if (!locations.isEmpty())
         {
-            String places[] = new String[locations.size()];
-
-            for (int index = 0; index < locations.size(); index++)
-            {
-                Location location = (Location) locations.get(index);
-                String coordinates = "" +location.getLatitude() + "," + location.getLongitude();
-                places[index] = coordinates;
-            }
-
-            GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient();  
-            long[][] distances = request.getDistanceMatrix(places);
-            //printSymmetricMatrix(distances);
-            message = processUsingNearestNeighbor(distances, 0);
+            TSPAlgorithm algorithm = new NearestNeighbor();
+            message = algorithm.processInstance(locations, 0);
             JOptionPane.showMessageDialog(null, message, "Result", 1);
         }
         else
@@ -87,27 +76,8 @@ public class JavaScriptHandler
         }
     }
     
-    private String processUsingNearestNeighbor(long[][] distances, int startingNode)
+    public void printMessage(String a)
     {
-        NearestNeighbor test = new NearestNeighbor();           
-        Integer[] solution = test.processTour(distances, startingNode);
-        String message = "Path:\n";
-        for(int i : solution)
-        {
-            message = message.concat(i+"\n");
-        }
-        return message;
-    }
-   
-    private void printSymmetricMatrix(long[][] distances)
-    {
-        for (int i = 0; i < distances.length; i++)
-            {
-                for (int j = 0; j < distances.length; j++)
-                {
-                    System.out.print(distances[i][j] + "  ");
-                }
-                System.out.println("");
-            }
+        System.out.println(a);
     }
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Rafael.Lopez
  */
-public class LocationsContainer extends ArrayList
+public class LocationsContainer extends ArrayList<Location>
 {   
     private int index;
     
@@ -25,10 +25,15 @@ public class LocationsContainer extends ArrayList
      * @param longitude The longitude of the location
      * @param latitude The latitude of the location
      */
-    public void addLocation(String latitude, String longitude)
+    public void addLocation(String latitude, String longitude, String placeDescription)
     {
-        Location location = new Location(latitude, longitude, index);
+        Location location = new Location(latitude, longitude, placeDescription, index);
         this.add(location);
         index++;
+    }
+    
+    public Location getLocation(int index)
+    {
+        return get(index);
     }
 }
