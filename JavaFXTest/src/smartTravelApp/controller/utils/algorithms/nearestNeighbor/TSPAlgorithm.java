@@ -25,12 +25,12 @@ public abstract class TSPAlgorithm
      */
     public final String processInstance(LocationsContainer locations, int startingNode)
     {
-        long[][] distances = getSymetricMatrix(locations);
+        long[][] distances = getSymmetricMatrix(locations);
         Integer[] solution = processTour(distances, startingNode);
         return formatMessage(solution, locations);
     }
     
-    final long[][] getSymetricMatrix(LocationsContainer locations){
+    final long[][] getSymmetricMatrix(LocationsContainer locations){
         String places[] = new String[locations.size()];
         
         for (int index = 0; index < locations.size(); index++)
