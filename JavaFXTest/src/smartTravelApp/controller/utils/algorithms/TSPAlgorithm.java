@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartTravelApp.controller.utils.algorithms.nearestNeighbor;
+package smartTravelApp.controller.utils.algorithms;
 
-import smartTravelApp.controller.utils.GoogleMapsDistanceMatrixClient;
-import smartTravelApp.model.Location;
 import smartTravelApp.model.LocationsContainer;
 
 /**
@@ -15,7 +13,6 @@ import smartTravelApp.model.LocationsContainer;
  */
 public abstract class TSPAlgorithm 
 {
-
     /**
      * A method that takes in a list of locations as part of a tour 
      * and returns an optimal distance-effective path.
@@ -24,24 +21,9 @@ public abstract class TSPAlgorithm
      * @return
      */
     public final String processInstance(LocationsContainer locations, int startingNode)
-    {
-        long[][] distances = getSymmetricMatrix(locations);
-        Integer[] solution = processTour(distances, startingNode);
+    {       
+        Integer[] solution = processTour(locations, startingNode);
         return formatMessage(solution, locations);
-    }
-    
-    final long[][] getSymmetricMatrix(LocationsContainer locations){
-        String places[] = new String[locations.size()];
-        
-        for (int index = 0; index < locations.size(); index++)
-        {
-            Location location = (Location) locations.get(index);
-            String coordinates = "" +location.getLatitude() + "," + location.getLongitude();
-            places[index] = coordinates;
-        }
-
-        GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient(); 
-        return request.getDistanceMatrix(places);
     }
     
     final String formatMessage(Integer[] solution, LocationsContainer locations){
@@ -53,5 +35,5 @@ public abstract class TSPAlgorithm
         return message;
     }
     
-    abstract Integer[] processTour(long[][] data, int start);
+    protected abstract Integer[] processTour(LocationsContainer locations, int start);
 }

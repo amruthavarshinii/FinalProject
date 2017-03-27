@@ -86,9 +86,9 @@
                 {
                     if (status === google.maps.GeocoderStatus.OK) 
                     {
-                        if (results[1]) 
+                        if (results[0]) 
                         {
-                            place = results[1].formatted_address;
+                            place = results[0].formatted_address;
                         } 
                         else 
                         {

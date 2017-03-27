@@ -1,6 +1,9 @@
 package smartTravelApp.controller.utils.algorithms.nearestNeighbor;
 
+import smartTravelApp.controller.utils.algorithms.TSPAlgorithm;
 import java.util.HashMap;
+import smartTravelApp.controller.utils.GoogleMapsDistanceMatrixClient;
+import smartTravelApp.model.LocationsContainer;
 
 /*
  * Written by Rafael Lopez <lopez.rafael08@gmail.com>, 2016
@@ -9,13 +12,16 @@ import java.util.HashMap;
 public class NearestNeighbor extends TSPAlgorithm
 {    
     @Override
-    public Integer[] processTour(long[][] data, int start)
+    public Integer[] processTour(LocationsContainer locations, int start)
     {
-        Integer[] solution = new Integer[data.length];
+        GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient(); 
+        long[][] distances = request.getDistanceMatrix(locations);
+        
+        Integer[] solution = new Integer[distances.length];
         long distance = 0;
         int currentNode = 0;
         
-        for (int i = 1; i < data.length; i++)
+        for (int i = 1; i < distances.length; i++)
         {    
             if (i == 1)
             {
@@ -23,7 +29,7 @@ public class NearestNeighbor extends TSPAlgorithm
                 currentNode = start;
             }
             
-            HashMap results = findNearestNeighbor(data, currentNode, solution);
+            HashMap results = findNearestNeighbor(distances, currentNode, solution);
             distance += (Long)results.get("distance");
             currentNode = (Integer)results.get("index");
             solution[i] = currentNode;        

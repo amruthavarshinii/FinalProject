@@ -10,7 +10,8 @@ import smartTravelApp.model.Location;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import smartTravelApp.controller.utils.algorithms.nearestNeighbor.NearestNeighbor;
-import smartTravelApp.controller.utils.algorithms.nearestNeighbor.TSPAlgorithm;
+import smartTravelApp.controller.utils.algorithms.TSPAlgorithm;
+import smartTravelApp.controller.utils.algorithms.geneticAlgorithm.GeneticAlgorithm;
 
 /**
  *
@@ -66,7 +67,7 @@ public class JavaScriptHandler
         String message;
         if (!locations.isEmpty())
         {
-            TSPAlgorithm algorithm = new NearestNeighbor();
+            TSPAlgorithm algorithm = new GeneticAlgorithm();
             message = algorithm.processInstance(locations, 0);
             JOptionPane.showMessageDialog(null, message, "Result", 1);
         }
