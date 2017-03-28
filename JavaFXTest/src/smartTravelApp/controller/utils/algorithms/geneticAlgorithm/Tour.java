@@ -15,7 +15,7 @@ import smartTravelApp.model.LocationsContainer;
  */
 public class Tour 
 {
-    LocationsContainer locations;
+    private LocationsContainer locations;
     
     public Tour(LocationsContainer locations)
     {
@@ -41,5 +41,10 @@ public class Tour
         }
         
         return totalDistance;
+    }
+    
+    public LocationsContainer getLocations()
+    {
+        return locations;
     }
 }

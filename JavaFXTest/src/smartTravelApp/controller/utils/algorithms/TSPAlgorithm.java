@@ -14,26 +14,32 @@ import smartTravelApp.model.LocationsContainer;
 public abstract class TSPAlgorithm 
 {
     /**
-     * A method that takes in a list of locations as part of a tour 
-     * and returns an optimal distance-effective path.
+     * A method that takes in a list of locations as part of a tour and returns
+     * an optimal distance-effective path produced by a TSP algorithm.
      * @param locations Locations to be processed
      * @param startingNode Starting node for the tour
      * @return
      */
     public final String processInstance(LocationsContainer locations, int startingNode)
     {       
-        Integer[] solution = processTour(locations, startingNode);
-        return formatMessage(solution, locations);
+        LocationsContainer solution = applyTSPAlgorithm(locations, startingNode);
+        return formatMessage(solution);
     }
     
-    final String formatMessage(Integer[] solution, LocationsContainer locations){
+    final String formatMessage(LocationsContainer solution){
         String message = "Path:\n";
-        for (int i = 0; i < solution.length; i++)
+        for (int i = 0; i < solution.size(); i++)
         {
-            message = message.concat(i + "- " +locations.getLocation(solution[i]).getPlaceDescription() +"\n");
+            message = message.concat(i + ") " + solution.get(i).getPlaceDescription() +"\n");
         }
         return message;
     }
     
-    protected abstract Integer[] processTour(LocationsContainer locations, int start);
+    /**
+     * Abstract method to be implemented using a specific TSP algorithm
+     * @param locations Tour to be processed
+     * @param start Starting point
+     * @return An optimal route produced by a TSP algorithm
+     */
+    protected abstract LocationsContainer applyTSPAlgorithm(LocationsContainer locations, int start);
 }

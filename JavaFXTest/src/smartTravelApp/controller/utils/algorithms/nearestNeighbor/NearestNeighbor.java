@@ -3,6 +3,7 @@ package smartTravelApp.controller.utils.algorithms.nearestNeighbor;
 import smartTravelApp.controller.utils.algorithms.TSPAlgorithm;
 import java.util.HashMap;
 import smartTravelApp.controller.utils.GoogleMapsDistanceMatrixClient;
+import smartTravelApp.model.Location;
 import smartTravelApp.model.LocationsContainer;
 
 /*
@@ -12,34 +13,34 @@ import smartTravelApp.model.LocationsContainer;
 public class NearestNeighbor extends TSPAlgorithm
 {    
     @Override
-    public Integer[] processTour(LocationsContainer locations, int start)
+    public LocationsContainer applyTSPAlgorithm(LocationsContainer locations, int start)
     {
         GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient(); 
         long[][] distances = request.getDistanceMatrix(locations);
         
-        Integer[] solution = new Integer[distances.length];
+        LocationsContainer solution = new LocationsContainer();
         long distance = 0;
-        int currentNode = 0;
+        int indexCurrentLocation = 0;
         
         for (int i = 1; i < distances.length; i++)
         {    
             if (i == 1)
             {
-                solution[0] = start;
-                currentNode = start;
+                solution.add(locations.get(0));
+                indexCurrentLocation = start;
             }
             
-            HashMap results = findNearestNeighbor(distances, currentNode, solution);
+            HashMap results = findNearestNeighbor(distances, indexCurrentLocation, solution);
             distance += (Long)results.get("distance");
-            currentNode = (Integer)results.get("index");
-            solution[i] = currentNode;        
+            indexCurrentLocation = (Integer)results.get("index");
+            solution.add(locations.get(indexCurrentLocation));       
         }
         System.out.println("*****Neareast Neighbor Algorithm******");
         System.out.println("Total distance: " + distance);
         return solution;
     }
     
-    private HashMap findNearestNeighbor(long[][] data, int currentNode, Integer[] nodesVisited)
+    private HashMap findNearestNeighbor(long[][] data, int currentNode, LocationsContainer locationsVisited)
     {
         int indexMin=0;
         long currentValue;
@@ -48,7 +49,7 @@ public class NearestNeighbor extends TSPAlgorithm
         {
             if ( currentNode != i )
             {
-                if( isValidNode(nodesVisited, i) )
+                if( isValidNode(locationsVisited, i) )
                 {
                     currentValue = data[currentNode][i];
                     if (tempMin != 0)
@@ -74,12 +75,12 @@ public class NearestNeighbor extends TSPAlgorithm
         return result;
     }
     
-    private boolean isValidNode(Integer[] visitedNodes, int index)
+    private boolean isValidNode(LocationsContainer locationsVisited, int index)
     {
         boolean alreadyVisited = true;
-        for (Integer i : visitedNodes)
+        for (Location location : locationsVisited)
         {
-            if(i != null && i == index)
+            if(location.getLocationId() == index)
             {
                 alreadyVisited = false;
                 break;

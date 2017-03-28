@@ -17,7 +17,7 @@ public class GeneticAlgorithm extends TSPAlgorithm
     private int tournamentSize;
     
     @Override
-    protected Integer[] processTour(LocationsContainer locations, int start) 
+    protected LocationsContainer applyTSPAlgorithm(LocationsContainer locations, int start) 
     {
         //Tournament size is selected randomly and has a direct impact
         //on selection pressure. The selection pressure is the degree to 
@@ -34,7 +34,7 @@ public class GeneticAlgorithm extends TSPAlgorithm
             population = evaluatePopulation(population);
         }
  
-        return null;
+        return population.getFittestIndividual().getLocations();
     }  
     
     private Population evaluatePopulation(Population population)
