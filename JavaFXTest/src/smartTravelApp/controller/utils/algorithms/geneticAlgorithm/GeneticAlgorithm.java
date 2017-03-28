@@ -28,7 +28,11 @@ public class GeneticAlgorithm extends TSPAlgorithm
         
         //Randomly create an initial population
         Population population = generateInitialPopulation(locations);
+        
+        //Evolve population
         population = evaluatePopulation(population);
+        
+        //Keep evolving until stop criteria is reached
         for (int i = 0; i < iterations; i++)
         {
             population = evaluatePopulation(population);
@@ -39,15 +43,23 @@ public class GeneticAlgorithm extends TSPAlgorithm
     
     private Population evaluatePopulation(Population population)
     {
-       //Use Tournament Selection
-        Tour parentA = doTournamentSelection(population);
-        Tour parentB = doTournamentSelection(population);
-                
-        for (Tour tour : population.getPopulation())
+        Population newPopulation = new Population();
+        
+        for (int i = 0; i < population.getPopulation().size(); i++)
         {
-            System.out.println(tour.getFitness());
+            //Selection: Tournament Selection
+            Tour parentA = doTournamentSelection(population);
+            Tour parentB = doTournamentSelection(population);
+
+            //Crossover
+            //A child is generated after applying Crossover using parentA and parentB
+            //Add child to the new population
         }
-        return null; 
+        
+        //Mutation
+        //Once the new population is generated do Mutation
+        
+        return newPopulation; 
     }
     
     private Tour doTournamentSelection(Population population)
