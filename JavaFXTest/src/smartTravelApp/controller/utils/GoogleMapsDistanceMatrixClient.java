@@ -28,7 +28,7 @@ public class GoogleMapsDistanceMatrixClient
         Request request = new Request.Builder().url(url).build();
         Response response = client.newCall(request).execute();
         long [] distanceArray = JsonReader.processJSONResponse(response.body().string(), distanceArraySize);
-        System.out.println(response.body().string());
+        //System.out.println(response.body().string());
         return distanceArray;
     }
     
@@ -37,7 +37,7 @@ public class GoogleMapsDistanceMatrixClient
         Request request = new Request.Builder().url(url).build();
         Response response = client.newCall(request).execute();
         long distance = JsonReader.processJSONResponse(response.body().string());
-        System.out.println(response.body().string());
+        //System.out.println(response.body().string());
         return distance;
     }
 
@@ -87,7 +87,7 @@ public class GoogleMapsDistanceMatrixClient
             String origin = "" + a.getLatitude() + "," + a.getLongitude();
             String destination = "" + b.getLatitude() + "," + b.getLongitude();            
             String urlRequest = buildRequestURL(origin, destination); 
-            System.out.println(urlRequest);
+            //System.out.println(urlRequest);
             
             distance = sendRequest(urlRequest); 
         }

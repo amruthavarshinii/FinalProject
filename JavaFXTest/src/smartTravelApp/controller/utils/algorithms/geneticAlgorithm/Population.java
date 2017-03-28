@@ -42,8 +42,46 @@ public class Population
         return population;
     }
     
+    protected int getPopulationSize()
+    {
+        return population.size();
+    }
+    
     protected void deletePopulation()
     {
         population = new ArrayList<>();
+    }
+    
+    protected void addIndividual(Tour tour)
+    {
+        if (population != null)
+        {
+            population.add(tour);
+        }
+    }
+    
+    protected Tour getFittestIndividual()
+    {
+        Tour winner = null;
+        int firstTour = 0;
+        
+        if (population != null)
+        {
+            winner = population.get(firstTour);
+            long winnerFitness = winner.getFitness();
+            
+            for (int i = 1; i < population.size(); i++)
+            {         
+                Tour tmp = population.get(i);
+                long tmpFitness = tmp.getFitness();
+                
+                if (tmpFitness < winnerFitness)
+                {
+                    winner = tmp;
+                    winnerFitness = tmpFitness;
+                }
+            }
+        }
+        return winner;
     }
 }
