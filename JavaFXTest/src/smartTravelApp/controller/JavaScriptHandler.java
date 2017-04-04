@@ -67,7 +67,7 @@ public class JavaScriptHandler
         String message;
         if (!locations.isEmpty())
         {
-            TSPAlgorithm algorithm = new NearestNeighbor();
+            TSPAlgorithm algorithm = new GeneticAlgorithm();
             message = algorithm.processInstance(locations, 0);
             JOptionPane.showMessageDialog(null, message, "Result", 1);
         }

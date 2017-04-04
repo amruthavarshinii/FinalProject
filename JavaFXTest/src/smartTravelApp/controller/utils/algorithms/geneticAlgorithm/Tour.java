@@ -22,6 +22,11 @@ public class Tour
         this.locations = locations;
     }
     
+    public Tour()
+    {
+        locations = new LocationsContainer();
+    }
+    
     /**
      * Gets the tour's fitness
      * @return
@@ -46,5 +51,20 @@ public class Tour
     public LocationsContainer getLocations()
     {
         return locations;
+    }
+    
+    public Location getLocation(int index)
+    {
+        return locations.get(index);
+    }
+    
+    public int getNumberOfLocations()
+    {
+        return locations.size();
+    }
+    
+    public void addLocation(Location location)
+    {
+        locations.add(location);
     }
 }
