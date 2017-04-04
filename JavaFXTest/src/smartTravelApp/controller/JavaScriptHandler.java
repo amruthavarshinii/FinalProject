@@ -9,9 +9,9 @@ import smartTravelApp.model.LocationsContainer;
 import smartTravelApp.model.Location;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
-import smartTravelApp.controller.utils.algorithms.nearestNeighbor.NearestNeighbor;
-import smartTravelApp.controller.utils.algorithms.TSPAlgorithm;
-import smartTravelApp.controller.utils.algorithms.geneticAlgorithm.GeneticAlgorithm;
+import smartTravelApp.model.algorithms.nearestNeighbor.NearestNeighbor;
+import smartTravelApp.model.algorithms.TSPAlgorithm;
+import smartTravelApp.model.algorithms.geneticAlgorithm.GeneticAlgorithm;
 
 /**
  *

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartTravelApp.controller.utils.algorithms.geneticAlgorithm;
+package smartTravelApp.model.algorithms.geneticAlgorithm;
 
-import smartTravelApp.controller.utils.algorithms.TSPAlgorithm;
+import smartTravelApp.model.algorithms.TSPAlgorithm;
 import smartTravelApp.model.Location;
 import smartTravelApp.model.LocationsContainer;
 

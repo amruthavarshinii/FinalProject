@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartTravelApp.controller.utils.algorithms;
+package smartTravelApp.model.algorithms;
 
 import smartTravelApp.model.LocationsContainer;
 

@@ -1,6 +1,6 @@
-package smartTravelApp.controller.utils.algorithms.nearestNeighbor;
+package smartTravelApp.model.algorithms.nearestNeighbor;
 
-import smartTravelApp.controller.utils.algorithms.TSPAlgorithm;
+import smartTravelApp.model.algorithms.TSPAlgorithm;
 import java.util.HashMap;
 import smartTravelApp.controller.utils.GoogleMapsDistanceMatrixClient;
 import smartTravelApp.model.Location;
