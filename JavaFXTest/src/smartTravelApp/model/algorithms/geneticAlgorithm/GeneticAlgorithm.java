@@ -49,22 +49,23 @@ public class GeneticAlgorithm extends TSPAlgorithm
         for (int i = 0; i < population.getPopulationSize(); i++)
         {
             //Selection: Tournament Selection
-            Tour parentA = doTournamentSelection(population);
-            Tour parentB = doTournamentSelection(population);
+            Tour parentA = doSelection(population);
+            Tour parentB = doSelection(population);
 
-            //Crossover
-            //A child is generated after applying Crossover using parentA and parentB
+            //Crossover: Single Point
             Tour child = doCrossover(parentA, parentB);
+            
+            //Mutation: Swap Mutation
+            doMutation(child);
+        
             newPopulation.addIndividual(child);
         }
-        
-        //Mutation
-        //Once the new population is generated do Mutation
         
         return newPopulation; 
     }
     
-    private Tour doTournamentSelection(Population population)
+    //This method does Tournament Selection
+    private Tour doSelection(Population population)
     {
         Population tournament = new Population();
         
@@ -76,6 +77,8 @@ public class GeneticAlgorithm extends TSPAlgorithm
         return tournament.getFittestIndividual();
     }
     
+    //This method does Single Point Crossover
+    //A child is generated after applying Crossover using parentA and parentB
     private Tour doCrossover(Tour parentA, Tour parentB)
     {
         int crossoverPointFactor = 2;
@@ -112,6 +115,27 @@ public class GeneticAlgorithm extends TSPAlgorithm
         }
         
         return child;
+    }
+    
+    //This method does Swap Mutation
+    //Select two positions on the chromosome at random, and interchange the values
+    private Tour doMutation(Tour individual)
+    {
+        int indexA = (int) (Math.random() * individual.getNumberOfLocations());
+        int indexB;
+        
+        do 
+        {
+            indexB = (int) (Math.random() * individual.getNumberOfLocations());
+        } while (indexA == indexB);
+        
+        Location locationA = individual.getLocation(indexA);
+        Location locationB = individual.getLocation(indexB);
+        
+        individual.setLocationAt(indexA, locationB);
+        individual.setLocationAt(indexB, locationA);
+        
+        return individual;
     }
     
     private Population generateInitialPopulation(LocationsContainer locations)

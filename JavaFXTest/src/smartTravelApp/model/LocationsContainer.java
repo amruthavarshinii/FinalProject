@@ -34,6 +34,6 @@ public class LocationsContainer extends ArrayList<Location>
     
     public Location getLocation(int index)
     {
-        return get(index);
+        return this.get(index);
     }
 }

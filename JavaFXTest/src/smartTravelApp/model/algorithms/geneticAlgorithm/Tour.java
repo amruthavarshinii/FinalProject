@@ -67,4 +67,9 @@ public class Tour
     {
         locations.add(location);
     }
+    
+    public void setLocationAt(int index, Location location)
+    {
+        locations.set(index, location);
+    }
 }
