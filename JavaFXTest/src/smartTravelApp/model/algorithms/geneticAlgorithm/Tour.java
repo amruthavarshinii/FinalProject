@@ -16,6 +16,7 @@ import smartTravelApp.model.LocationsContainer;
 public class Tour 
 {
     private LocationsContainer locations;
+    private long fitnessValue;
     
     public Tour(LocationsContainer locations)
     {
@@ -33,19 +34,21 @@ public class Tour
      */
     public long getFitness()
     {
-        GoogleMapsDistanceMatrixClient client = new GoogleMapsDistanceMatrixClient();
-        long totalDistance = 0;
-        
-        //To be started in position 1 as two locations are needed
-        for (int i = 1; i < locations.size(); i++)
+        if (fitnessValue == 0)
         {
-            Location origin = locations.get(i - 1);
-            Location destination = locations.get(i);
-            
-            totalDistance += client.getDistanceBetweenTwoLocations(origin, destination);
+            GoogleMapsDistanceMatrixClient client = new GoogleMapsDistanceMatrixClient();
+
+            //To be started in position 1 as two locations are needed
+            for (int i = 1; i < locations.size(); i++)
+            {
+                Location origin = locations.get(i - 1);
+                Location destination = locations.get(i);
+
+                fitnessValue += client.getDistanceBetweenTwoLocations(origin, destination);
+            }
         }
         
-        return totalDistance;
+        return fitnessValue;
     }
     
     public LocationsContainer getLocations()

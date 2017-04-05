@@ -60,6 +60,16 @@ public class Population
         }
     }
     
+    protected Tour getIndividual(int index)
+    {
+        Tour tour = null;
+        if (population != null)
+        {
+            tour = population.get(index);
+        }
+        return tour;
+    }
+    
     protected Tour getFittestIndividual()
     {
         Tour winner = null;

@@ -25,28 +25,37 @@ public class GeneticAlgorithm extends TSPAlgorithm
         //which the better individuals are favored.
         //http://www.complex-systems.com/pdf/09-3-2.pdf
         tournamentSize = locations.size() / 2;
-        int iterations = locations.size();
+        int iterations = 3;
         
         //Randomly create an initial population
         Population population = generateInitialPopulation(locations);
         
         //Evolve population
         population = evaluatePopulation(population);
+        System.out.println("Initial fitness value: " + population.getFittestIndividual().getFitness());
         
         //Keep evolving until stop criteria is reached
-        //for (int parentIndex = 0; parentIndex < iterations; parentIndex++)
-        //{
+        for (int parentIndex = 0; parentIndex < iterations; parentIndex++)
+        {
             population = evaluatePopulation(population);
-        //}
+            System.out.println("Fitness value: " + population.getFittestIndividual().getFitness());
+        }
  
+        System.out.println("Final fitness value: " + population.getFittestIndividual().getFitness());
         return population.getFittestIndividual().getLocations();
     }  
     
     private Population evaluatePopulation(Population population)
     {
+        int elitismFactor = 1;
         Population newPopulation = new Population();
         
-        for (int i = 0; i < population.getPopulationSize(); i++)
+        //Elitism is used to ensure that the best individual survives and 
+        //is copied into the next generation
+        newPopulation.addIndividual(population.getFittestIndividual());
+        
+        
+        for (int i = elitismFactor; i < population.getPopulationSize(); i++)
         {
             //Selection: Tournament Selection
             Tour parentA = doSelection(population);
@@ -72,7 +81,7 @@ public class GeneticAlgorithm extends TSPAlgorithm
         for (int i = 0; i < tournamentSize; i++)
         {
             int randomTourIndex = (int) (Math.random() * population.getPopulationSize());
-            tournament.addIndividual(population.getPopulation().get(randomTourIndex));
+            tournament.addIndividual(population.getIndividual(randomTourIndex));
         }
         return tournament.getFittestIndividual();
     }
