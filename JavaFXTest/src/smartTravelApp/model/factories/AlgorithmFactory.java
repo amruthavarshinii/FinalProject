@@ -6,6 +6,7 @@
 package smartTravelApp.model.factories;
 
 import smartTravelApp.model.algorithms.TSPAlgorithm;
+import smartTravelApp.model.algorithms.bruteForce.BruteForce;
 import smartTravelApp.model.algorithms.geneticAlgorithm.GeneticAlgorithm;
 import smartTravelApp.model.algorithms.nearestNeighbor.NearestNeighbor;
 
@@ -19,7 +20,11 @@ public class AlgorithmFactory
     {
         TSPAlgorithm algorithm = null;
         
-        if (numberOfLocations < 8)
+        if (numberOfLocations < 5)
+        {
+            algorithm = new BruteForce();
+        }
+        else if (numberOfLocations < 8)
         {
             algorithm = new NearestNeighbor();
         }

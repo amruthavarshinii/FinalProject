@@ -13,7 +13,7 @@ import smartTravelApp.model.LocationsContainer;
 public class NearestNeighbor extends TSPAlgorithm
 {    
     @Override
-    public LocationsContainer applyTSPAlgorithm(LocationsContainer locations, int start)
+    public HashMap applyTSPAlgorithm(LocationsContainer locations, int start)
     {
         GoogleMapsDistanceMatrixClient request = new GoogleMapsDistanceMatrixClient(); 
         long[][] distances = request.getDistanceMatrix(locations);
@@ -37,7 +37,12 @@ public class NearestNeighbor extends TSPAlgorithm
         }
         System.out.println("*****Neareast Neighbor Algorithm******");
         System.out.println("Total distance: " + distance);
-        return solution;
+        
+        HashMap result = new HashMap();
+        result.put("tour", solution);
+        result.put("distance", distance);
+        
+        return result;
     }
     
     private HashMap findNearestNeighbor(long[][] data, int currentNode, LocationsContainer locationsVisited)

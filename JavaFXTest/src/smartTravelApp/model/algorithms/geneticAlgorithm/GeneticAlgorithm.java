@@ -5,6 +5,7 @@
  */
 package smartTravelApp.model.algorithms.geneticAlgorithm;
 
+import java.util.HashMap;
 import smartTravelApp.model.algorithms.TSPAlgorithm;
 import smartTravelApp.model.Location;
 import smartTravelApp.model.LocationsContainer;
@@ -18,7 +19,7 @@ public class GeneticAlgorithm extends TSPAlgorithm
     private int tournamentSize;
     
     @Override
-    protected LocationsContainer applyTSPAlgorithm(LocationsContainer locations, int start) 
+    protected HashMap applyTSPAlgorithm(LocationsContainer locations, int start) 
     {
         //Tournament size is selected randomly and has a direct impact
         //on selection pressure. The selection pressure is the degree to 
@@ -42,7 +43,12 @@ public class GeneticAlgorithm extends TSPAlgorithm
         }
  
         System.out.println("Final fitness value: " + population.getFittestIndividual().getFitness());
-        return population.getFittestIndividual().getLocations();
+        
+        HashMap result = new HashMap();
+        result.put("tour", population.getFittestIndividual().getLocations());
+        result.put("distance", population.getFittestIndividual().getFitness());
+        
+        return result;
     }  
     
     private Population evaluatePopulation(Population population)

@@ -5,6 +5,7 @@
  */
 package smartTravelApp.model.algorithms;
 
+import java.util.HashMap;
 import smartTravelApp.model.LocationsContainer;
 
 /**
@@ -22,16 +23,20 @@ public abstract class TSPAlgorithm
      */
     public final String processInstance(LocationsContainer locations, int startingNode)
     {       
-        LocationsContainer solution = applyTSPAlgorithm(locations, startingNode);
-        return formatMessage(solution);
+        HashMap solution = applyTSPAlgorithm(locations, startingNode);
+        LocationsContainer tour = (LocationsContainer)solution.get("tour");
+        long distance = (Long)solution.get("distance");
+        return formatMessage(tour, distance);
     }
     
-    final String formatMessage(LocationsContainer solution){
+    final String formatMessage(LocationsContainer solution, long distance)
+    {
         String message = "Path:\n";
         for (int i = 0; i < solution.size(); i++)
         {
             message = message.concat(i + ") " + solution.get(i).getPlaceDescription() +"\n");
         }
+        message  += "\nTotal distance travelled: " + (distance/1000) + "km.";
         return message;
     }
     
@@ -41,5 +46,5 @@ public abstract class TSPAlgorithm
      * @param start Starting point
      * @return An optimal route produced by a TSP algorithm
      */
-    protected abstract LocationsContainer applyTSPAlgorithm(LocationsContainer locations, int start);
+    protected abstract HashMap applyTSPAlgorithm(LocationsContainer locations, int start);
 }

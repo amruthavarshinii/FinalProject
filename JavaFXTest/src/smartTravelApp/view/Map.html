@@ -154,13 +154,15 @@
         
         function processSelection()
         {
-            java.processSelection();
+            var startingNode = document.getElementById("startingNode").value;
+            java.processSelection(startingNode);
         }
     </script>
     <input id="addLocation" type="button" value="Add Location" onclick="addLocation();" />
     <input id="printLocations" type="button" value="Print Locations" onclick="printLocations();" />
     <input id="clearSelection" type="button" value="Clear Selection" onclick="clearSelection();" />
     <input id="processSelection" type="button" value="Process Selection" onclick="processSelection();" />
+    Specify starting node: <input id="startingNode" type="text" name="startingNode">
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-ORl8X50QuLmTyhP4izLzCyWcza_eDGM&libraries=places&callback=initMap">
     </script>

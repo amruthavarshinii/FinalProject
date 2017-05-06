@@ -25,7 +25,7 @@ public class MainWindow extends Application {
         VBox mainbox = new VBox();
         mainbox.getChildren().add(myBrowser);
         
-        scene = new Scene(mainbox, 1200, 680);
+        scene = new Scene(mainbox, 800, 610);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
