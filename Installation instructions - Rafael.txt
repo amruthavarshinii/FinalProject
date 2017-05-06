@@ -1,0 +1,7 @@
+- This is a JavaFX application; therefore, it will run on every operating system that runs Java.
+
+- The project was created through NetBeans. To open the project just:
+	a) open NetBeans
+	b) go to OpenProject
+	c) find project
+	d) click Open
