@@ -30,7 +30,6 @@ public class BruteForce extends TSPAlgorithm
             locationIds.add(locations.get(i).getLocationId());
         }
         ArrayList<Integer> route = new ArrayList<>();
-        System.out.println("******Brute Force******");
         findAllRoutes(route, locationIds, locations);
              
         HashMap result = new HashMap();

@@ -61,23 +61,21 @@ public class JavaScriptHandler
     /**
      * Process the current selection of locations
      */
-    public void processSelection(int startingNode)
+    public void processSelection(Integer startingNode)
     {
         String message;
         if (!locations.isEmpty())
         {
             TSPAlgorithm algorithm;
-            if (startingNode != -1 )
+            if (startingNode != null )
             {
                 algorithm = AlgorithmFactory.createAlgorithmInstance(6);
-                message = algorithm.processInstance(locations, startingNode);
             }
             else
             {
                 algorithm = AlgorithmFactory.createAlgorithmInstance(locations.size());
-                message = algorithm.processInstance(locations);
             }           
-            
+            message = algorithm.processInstance(locations, 0);
             JOptionPane.showMessageDialog(null, message, "Result", 1);
         }
         else

@@ -15,10 +15,11 @@ import smartTravelApp.model.LocationsContainer;
 public abstract class TSPAlgorithm 
 {
     /**
-     * A method that takes in a list of locations as part of a tour and starting point.
+     * A method that takes in a list of locations as part of a tour and returns
+     * an optimal distance-effective path produced by a TSP algorithm.
      * @param locations Locations to be processed
      * @param startingNode Starting node for the tour
-     * @return An optimal distance-effective path produced by a TSP algorithm.
+     * @return
      */
     public final String processInstance(LocationsContainer locations, int startingNode)
     {       
@@ -26,16 +27,6 @@ public abstract class TSPAlgorithm
         LocationsContainer tour = (LocationsContainer)solution.get("tour");
         long distance = (Long)solution.get("distance");
         return formatMessage(tour, distance);
-    }
-    
-    /**
-     * A method that takes in a list of locations as part of a tour
-     * @param locations Locations to be processed
-     * @return An optimal distance-effective path produced by a TSP algorithm.
-     */
-    public final String processInstance(LocationsContainer locations)
-    {       
-        return processInstance(locations, 0);
     }
     
     final String formatMessage(LocationsContainer solution, long distance)
