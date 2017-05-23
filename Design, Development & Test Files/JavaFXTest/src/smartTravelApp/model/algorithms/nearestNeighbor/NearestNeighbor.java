@@ -26,8 +26,16 @@ public class NearestNeighbor extends TSPAlgorithm
         {    
             if (i == 1)
             {
-                solution.add(locations.get(0));
-                indexCurrentLocation = start;
+                if (start == -1)
+                {
+                    solution.add(locations.get(0));
+                    indexCurrentLocation = 0;
+                }
+                else
+                {
+                    solution.add(locations.get(start));
+                    indexCurrentLocation = start;
+                }               
             }
             
             HashMap results = findNearestNeighbor(distances, indexCurrentLocation, solution);

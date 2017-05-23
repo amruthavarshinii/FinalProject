@@ -19,7 +19,7 @@ public class MainWindow extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Google Maps API Demo");
+        primaryStage.setTitle("Smart Travel Application");
         myBrowser = new MyBrowser();
         
         VBox mainbox = new VBox();
